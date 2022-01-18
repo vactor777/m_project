@@ -1,5 +1,5 @@
 #include "telbase.h"
-
+#include <cstring>
 Abonent::Abonent()
 {
 	name_ = new char[1];
@@ -21,4 +21,16 @@ Abonent::Abonent(const char* name, long telHome, long telWork, std::string other
 Abonent::~Abonent()
 {
 	delete[] name_;
+}
+
+//CLass Telbase
+Telbase::Telbase(){
+	ptrAbonent = nullptr;
+}
+Telbase::~Telbase(){
+	delete ptrAbonent;
+}
+void Telbase::createAbonent(const char* name){
+	Abonent* abonent = new Abonent(name);
+	ptrAbonent = abonent; 
 }
