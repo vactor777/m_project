@@ -1,2 +1,8 @@
-file1.txt
-/newfolder
+telbook.sln
+/telbook/telbook.vcxproj
+/telbook/telbook.vcxproj.filters
+/telbook/telbook.vcxproj.user
+/telbook/x64
+x64/
+/telbook/.vs/
+.vs/
