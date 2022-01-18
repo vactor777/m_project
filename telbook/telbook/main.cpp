@@ -5,5 +5,6 @@ int main() {
 	Telbase my;
 	my.createAbonent("Viktor");
 	my.getAbonent();
+	//ss
 	return 0;
 }
