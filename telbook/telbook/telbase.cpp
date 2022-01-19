@@ -6,6 +6,7 @@ Abonent::Abonent()
 	name_[0] = '\0';
 	telHome_ = telWork_ = 0;
 	otherInfo_ = "empty";
+	ptr_next_Obj_ = nullptr;
 }
 
 Abonent::Abonent(const char* name, ulong telHome, ulong telWork, std::string otherInfo)
@@ -16,7 +17,7 @@ Abonent::Abonent(const char* name, ulong telHome, ulong telWork, std::string oth
 	telHome_ = telHome;
 	telWork_ = telWork;
 	otherInfo_ = otherInfo;
-	
+	ptr_next_Obj_ = nullptr;
 }
 
 Abonent::~Abonent()
@@ -30,13 +31,15 @@ void Abonent::setName(const char* name){
 	strcpy(name_, name);
 }
 void Abonent::setTel(ulong telephone, int keys){
-	if (keys = 0)
+	if (keys == 0)
 		telHome_ = telephone;
 	else
 		telWork_ = telephone;
 
 }
-void Abonent::setInfo(std::string otherInfo){}
+void Abonent::setInfo(const std::string otherInfo){
+	otherInfo_ = otherInfo;
+}
 
 //CLass Telbase
 Telbase::Telbase(){
@@ -48,14 +51,20 @@ Telbase::~Telbase(){
 	//delete ptrAbonent;
 }
 void Telbase::createAbonent(const char* name,ulong telHome, ulong telWork, std::string otherInfo){
+	if (!countObj)
+		ptrAbonent->setPtrNextObj();
 	Abonent* abonent = new Abonent(name, telHome, telWork, otherInfo);
+	
+
 	ptrAbonent = abonent; 
 	countObj++;
 }
-void Telbase::changeAbonent(const char* name){
+void Telbase::changeName(const char* name){
 	ptrAbonent->setName(name);
 }
-void Telbase::changeAbonent(ulong telHome_telWork, int keys){
+void Telbase::changeTelephone(ulong telHome_telWork, int keys){
 	ptrAbonent->setTel(telHome_telWork, keys);
 }
-void Telbase::changeAbonent(std::string otherInfo){}
+void Telbase::changeOtherInfo(const std::string otherInfo){
+	ptrAbonent->setInfo(otherInfo);
+}
