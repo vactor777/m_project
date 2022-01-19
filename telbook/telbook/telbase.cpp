@@ -8,7 +8,7 @@ Abonent::Abonent()
 	otherInfo_ = "empty";
 }
 
-Abonent::Abonent(const char* name, long telHome, long telWork, std::string otherInfo)
+Abonent::Abonent(const char* name, ulong telHome, ulong telWork, std::string otherInfo)
 {
 	int len = strlen(name);
 	name_ = new char[len + 1];
@@ -16,6 +16,7 @@ Abonent::Abonent(const char* name, long telHome, long telWork, std::string other
 	telHome_ = telHome;
 	telWork_ = telWork;
 	otherInfo_ = otherInfo;
+	
 }
 
 Abonent::~Abonent()
@@ -26,11 +27,14 @@ Abonent::~Abonent()
 //CLass Telbase
 Telbase::Telbase(){
 	ptrAbonent = nullptr;
+	countObj = 0;
 }
 Telbase::~Telbase(){
-	delete ptrAbonent;
+	
+	//delete ptrAbonent;
 }
-void Telbase::createAbonent(const char* name){
-	Abonent* abonent = new Abonent(name);
+void Telbase::createAbonent(const char* name,ulong telHome, ulong telWork, std::string otherInfo){
+	Abonent* abonent = new Abonent(name, telHome, telWork, otherInfo);
 	ptrAbonent = abonent; 
+	countObj++;
 }
