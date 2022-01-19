@@ -68,31 +68,72 @@ void Telbase::createAbonent(const char* name, unsigned long telHome, unsigned lo
 	}
 	countObj++;
 }
-void Telbase::changeName(const char* name){
-	ptrAbonent->setName(name);
+void Telbase::changeName(const char* name, const char* new_name){
+	Abonent* ptrTmp = findAbonent(name);
+	ptrTmp->setName(new_name);
 }
-void Telbase::changeTelephone(unsigned long telHome_telWork, int keys){
-	ptrAbonent->setTel(telHome_telWork, keys);
+void Telbase::changeTelephone(const char* name, unsigned long telHome_telWork, int keys){
+	Abonent* ptrTmp = findAbonent(name);
+	ptrTmp->setTel(telHome_telWork, keys);
 }
-void Telbase::changeOtherInfo(const std::string otherInfo){
-	ptrAbonent->setInfo(otherInfo);
+void Telbase::changeOtherInfo(const char* name, const std::string otherInfo){
+	Abonent* ptrTmp = findAbonent(name);
+	ptrTmp->setInfo(otherInfo);
+
 }
 
-void Telbase::findAbonent(const char* name)
+Abonent* Telbase::findAbonent(const char* name)
 {
 	Abonent* ptrTmp = ptrStartAbonent;
 	int count = 0;
 	for (int i = 0; i < countObj; i++) {
 		char* strTmp = ptrTmp->getName();
-		if (strcmp(name, strTmp) == 0) {
-			ptrTmp->to_string();
-			return;//пока выход, но можно продолжить если есть с одинаковыми именами абоненты
-		}
+		if (strcmp(name, strTmp) == 0)
+			return ptrTmp;//пока выход, но можно продолжить если есть с одинаковыми именами абоненты
 		Abonent* ptrTmp2 = ptrTmp;
 		ptrTmp = ptrTmp2->getNextObj();
 	}
-	if (!count)
+	if (!count) {
 		std::cout << "abonent don't found";
+		return nullptr;
+	}
+	return ptrTmp;
+
+}
+//соединить поиск и удаление сделать одну функцию по поиску в private поле
+void Telbase::deleteAbonent(const char* name)
+{
+	Abonent* ptrTmp = ptrStartAbonent;
+	Abonent* ptrOld = ptrStartAbonent;
+	for (int i = 0; i < countObj; i++) {
+		char* strTmp = ptrTmp->getName();
+		if (strcmp(name, strTmp) == 0) {
+			//если удаляем первого абонента
+			if (i == 0) {
+				ptrStartAbonent = ptrStartAbonent->getNextObj();
+				delete ptrTmp;
+				countObj--;
+				return;
+			}
+			//если удаляем последнео абонента
+			if (i == (countObj -1)) {
+			//	Abonent* ptrT = nullptr;
+				ptrOld->setPtrNextObj(nullptr);
+				ptrAbonent = ptrOld;
+				delete ptrTmp;
+				countObj--;
+				return;
+			}
+		    ptrOld->setPtrNextObj(ptrTmp->getNextObj());
+			delete ptrTmp;
+			countObj--;
+			return;//пока выход, но можно продолжить если есть с одинаковыми именами абоненты
+		}
+		Abonent* ptrTmp2 = ptrTmp;
+		ptrOld = ptrTmp2;
+		ptrTmp = ptrTmp2->getNextObj();
+	
+	}
 }
 
 void Telbase::getAbonent()

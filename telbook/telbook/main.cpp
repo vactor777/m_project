@@ -6,20 +6,40 @@ int main() {
 //	setlocale(LC_ALL, "rus");
 	using std::cout;
 	using std::endl;
-	Abonent myss;
+	
 
 	Telbase my;
 	my.createAbonent("Viktor");
-	my.changeName("alex");
-	my.changeTelephone(89441244353, 1);
-	my.changeTelephone(89133683208);
-	my.changeOtherInfo("This is my abonent");
 	my.createAbonent("Stepan");
 	my.createAbonent("Angol");
 	my.createAbonent("Lera");
 	my.getAbonent();
 	cout << my.getCount() << endl;
-	my.findAbonent("Stepan");
+	
+//	my.deleteAbonent("Lera");
+//	my.deleteAbonent("alex");
+	my.deleteAbonent("Lera");
+	my.deleteAbonent("Angol");
+	cout << endl;
+	cout << endl;
+	cout << endl;
+	my.getAbonent();
+
+	cout << endl;
+	cout << endl;
+	cout << endl;
+	my.createAbonent("alex");
+	my.createAbonent("gg");
+	my.changeName("Viktor", "Mitja");
+	my.changeTelephone("Stepan", 865456);
+	my.getAbonent();
+	my.deleteAbonent("Mitja");
+	my.deleteAbonent("gg");
+	cout << endl;
+	cout << endl;
+	my.getAbonent();
+	
+	cout << my.getCount() << endl;
 	//ss
 	return 0;
 }

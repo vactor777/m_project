@@ -32,11 +32,11 @@ public:
 	Telbase();
 	~Telbase();
 	void createAbonent(const char* name, unsigned long telHome = 0, unsigned long telWork = 0, std::string otherInfo = "empty");
-	void changeName(const char* name);
-	void changeTelephone(unsigned long telHome_telWork, int keys = 0);
-	void changeOtherInfo(const std::string otherInfo);
-	void findAbonent(const char* name);
-	//void deleteAbonent();
+	void changeName(const char* name, const char* new_name);
+	void changeTelephone(const char* name, unsigned long telHome_telWork, int keys = 0);
+	void changeOtherInfo(const char* name, const std::string otherInfo);
+	Abonent* findAbonent(const char* name);
+	void deleteAbonent(const char* name);
 	//void showAbonent();
 	void getAbonent();
 	int getCount() { return countObj; }
