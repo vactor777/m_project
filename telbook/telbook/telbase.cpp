@@ -78,13 +78,29 @@ void Telbase::changeOtherInfo(const std::string otherInfo){
 	ptrAbonent->setInfo(otherInfo);
 }
 
+void Telbase::findAbonent(const char* name)
+{
+	Abonent* ptrTmp = ptrStartAbonent;
+	int count = 0;
+	for (int i = 0; i < countObj; i++) {
+		char* strTmp = ptrTmp->getName();
+		if (strcmp(name, strTmp) == 0) {
+			ptrTmp->to_string();
+			return;//пока выход, но можно продолжить если есть с одинаковыми именами абоненты
+		}
+		Abonent* ptrTmp2 = ptrTmp;
+		ptrTmp = ptrTmp2->getNextObj();
+	}
+	if (!count)
+		std::cout << "abonent don't found";
+}
+
 void Telbase::getAbonent()
 {
 	if (countObj == 1)
 		ptrStartAbonent->to_string();
 	else {
-		ptrStartAbonent->to_string();
-		Abonent* ptrTmp = ptrStartAbonent->getNextObj();
+		Abonent* ptrTmp = ptrStartAbonent;
 		for (int i = 0; i < countObj; i++) {
 			ptrTmp->to_string();
 			Abonent* ptrTmp2 = ptrTmp;

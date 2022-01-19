@@ -20,6 +20,7 @@ public:
 	void setPtrNextObj(Abonent* ptr) { ptr_next_Obj_ = ptr; };
 	void to_string() const{std::cout << name_ << " " << telHome_ << " " << telWork_ << " " << otherInfo_ << '\n';};
 	Abonent* getNextObj() const { return ptr_next_Obj_; };
+	char* getName() const { return name_; };
 };
 class Telbase
 {
@@ -34,6 +35,7 @@ public:
 	void changeName(const char* name);
 	void changeTelephone(unsigned long telHome_telWork, int keys = 0);
 	void changeOtherInfo(const std::string otherInfo);
+	void findAbonent(const char* name);
 	//void deleteAbonent();
 	//void showAbonent();
 	void getAbonent();

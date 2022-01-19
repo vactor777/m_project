@@ -5,21 +5,21 @@ int main() {
 	//g
 //	setlocale(LC_ALL, "rus");
 	using std::cout;
-	cout << "enter commmand: ";
-	
+	using std::endl;
+	Abonent myss;
+
 	Telbase my;
 	my.createAbonent("Viktor");
-	my.getAbonent();
 	my.changeName("alex");
 	my.changeTelephone(89441244353, 1);
 	my.changeTelephone(89133683208);
 	my.changeOtherInfo("This is my abonent");
-	my.getAbonent();
 	my.createAbonent("Stepan");
-	my.createAbonent("lll");
-	my.createAbonent("mssss");
+	my.createAbonent("Angol");
+	my.createAbonent("Lera");
 	my.getAbonent();
-	std::cout << my.getCount();
+	cout << my.getCount() << endl;
+	my.findAbonent("Stepan");
 	//ss
 	return 0;
 }
