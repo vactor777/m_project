@@ -12,16 +12,18 @@ private:
 	Abonent* ptr_next_Obj_;
 public:
 	Abonent();
+	//сделать инициализаторы
 	Abonent(const char* name, unsigned long telHome, unsigned long telWork, std::string otherInfo);
 	~Abonent();
 	void setName(const char* name);
 	void setTel(unsigned long telephone, int keys);
 	void setInfo(const std::string otherInfo);
-	void setPtrNextObj(Abonent* ptr) { ptr_next_Obj_ = ptr; };
-	void to_string() const{std::cout << name_ << " " << telHome_ << " " << telWork_ << " " << otherInfo_ << '\n';};
-	Abonent* getNextObj() const { return ptr_next_Obj_; };
-	char* getName() const { return name_; };
+	inline void setPtrNextObj(Abonent* ptr) { ptr_next_Obj_ = ptr; };
+	inline Abonent* getNextObj() const { return ptr_next_Obj_; };
+	inline char* getName() const { return name_; };
+	void to_string() const;
 };
+
 class Telbase
 {
 private:
@@ -40,6 +42,9 @@ public:
 	//void showAbonent();
 	void getAbonent();
 	int getCount() { return countObj; }
+	void writeToFile();
+	void readToFile();
+	
 
 };
 

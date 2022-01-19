@@ -3,43 +3,36 @@
 
 int main() {
 	//g
-//	setlocale(LC_ALL, "rus");
+
 	using std::cout;
 	using std::endl;
 	
-
 	Telbase my;
-	my.createAbonent("Viktor");
+	my.createAbonent("Viktor Viktorovich");
 	my.createAbonent("Stepan");
 	my.createAbonent("Angol");
 	my.createAbonent("Lera");
 	my.getAbonent();
-	cout << my.getCount() << endl;
-	
-//	my.deleteAbonent("Lera");
-//	my.deleteAbonent("alex");
+	cout << "object count " << my.getCount() << endl;
 	my.deleteAbonent("Lera");
 	my.deleteAbonent("Angol");
 	cout << endl;
-	cout << endl;
-	cout << endl;
 	my.getAbonent();
-
+	cout << "object count " << my.getCount() << endl;
 	cout << endl;
-	cout << endl;
-	cout << endl;
-	my.createAbonent("alex");
+	my.createAbonent("alex Braunford");
 	my.createAbonent("gg");
 	my.changeName("Viktor", "Mitja");
 	my.changeTelephone("Stepan", 865456);
 	my.getAbonent();
+	cout << "object count " << my.getCount() << endl;
 	my.deleteAbonent("Mitja");
 	my.deleteAbonent("gg");
-	cout << endl;
+	my.createAbonent("jem");
+	my.createAbonent("trr");
 	cout << endl;
 	my.getAbonent();
-	
-	cout << my.getCount() << endl;
-	//ss
+	cout << "object count " << my.getCount() << endl;
+
 	return 0;
 }

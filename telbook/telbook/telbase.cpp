@@ -44,6 +44,15 @@ void Abonent::setInfo(const std::string otherInfo){
 	otherInfo_ = otherInfo;
 }
 
+void Abonent::to_string() const
+{
+	std::cout << "Name: " << name_ << std::endl;
+//	std::cout << "Home Telephone: " << telHome_ << std::endl;
+//	std::cout << "Work Telephone: " << telWork_ << std::endl;
+//	std::cout << "Other Info: " << otherInfo_ << std::endl;
+//	std::cout << std::endl;
+}
+
 //CLass Telbase
 Telbase::Telbase(){
 	ptrAbonent = nullptr;
@@ -70,22 +79,27 @@ void Telbase::createAbonent(const char* name, unsigned long telHome, unsigned lo
 }
 void Telbase::changeName(const char* name, const char* new_name){
 	Abonent* ptrTmp = findAbonent(name);
+	if (ptrTmp == nullptr)
+		return;
 	ptrTmp->setName(new_name);
 }
 void Telbase::changeTelephone(const char* name, unsigned long telHome_telWork, int keys){
 	Abonent* ptrTmp = findAbonent(name);
+	if (ptrTmp == nullptr)
+		return;
 	ptrTmp->setTel(telHome_telWork, keys);
 }
 void Telbase::changeOtherInfo(const char* name, const std::string otherInfo){
 	Abonent* ptrTmp = findAbonent(name);
+	if (ptrTmp == nullptr)
+		return;
 	ptrTmp->setInfo(otherInfo);
-
 }
 
 Abonent* Telbase::findAbonent(const char* name)
 {
 	Abonent* ptrTmp = ptrStartAbonent;
-	int count = 0;
+	bool count = true;
 	for (int i = 0; i < countObj; i++) {
 		char* strTmp = ptrTmp->getName();
 		if (strcmp(name, strTmp) == 0)
@@ -93,12 +107,8 @@ Abonent* Telbase::findAbonent(const char* name)
 		Abonent* ptrTmp2 = ptrTmp;
 		ptrTmp = ptrTmp2->getNextObj();
 	}
-	if (!count) {
-		std::cout << "abonent don't found";
+	if (count)
 		return nullptr;
-	}
-	return ptrTmp;
-
 }
 //соединить поиск и удаление сделать одну функцию по поиску в private поле
 void Telbase::deleteAbonent(const char* name)
@@ -117,7 +127,6 @@ void Telbase::deleteAbonent(const char* name)
 			}
 			//если удаляем последнео абонента
 			if (i == (countObj -1)) {
-			//	Abonent* ptrT = nullptr;
 				ptrOld->setPtrNextObj(nullptr);
 				ptrAbonent = ptrOld;
 				delete ptrTmp;
@@ -132,7 +141,10 @@ void Telbase::deleteAbonent(const char* name)
 		Abonent* ptrTmp2 = ptrTmp;
 		ptrOld = ptrTmp2;
 		ptrTmp = ptrTmp2->getNextObj();
-	
+	}
+	if (countObj == 0) {
+		ptrAbonent = nullptr;
+		ptrStartAbonent = nullptr;
 	}
 }
 
