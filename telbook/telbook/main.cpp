@@ -8,7 +8,9 @@ int main() {
 
 	Telbase my;
 	my.createAbonent("Viktor");
-	
+	my.getAbonent();
+	my.changeAbonent("alex");
+	my.changeAbonent(8888, 1);
 	my.getAbonent();
 	//ss
 	return 0;
