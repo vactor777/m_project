@@ -3,7 +3,7 @@
 
 int main() {
 	//g
-	setlocale(LC_ALL, "rus");
+//	setlocale(LC_ALL, "rus");
 	using std::cout;
 	cout << "enter commmand: ";
 	
@@ -15,6 +15,11 @@ int main() {
 	my.changeTelephone(89133683208);
 	my.changeOtherInfo("This is my abonent");
 	my.getAbonent();
+	my.createAbonent("Stepan");
+	my.createAbonent("lll");
+	my.createAbonent("mssss");
+	my.getAbonent();
+	std::cout << my.getCount();
 	//ss
 	return 0;
 }

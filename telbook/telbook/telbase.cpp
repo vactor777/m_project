@@ -47,6 +47,7 @@ void Abonent::setInfo(const std::string otherInfo){
 //CLass Telbase
 Telbase::Telbase(){
 	ptrAbonent = nullptr;
+	ptrStartAbonent = nullptr;
 	countObj = 0;
 }
 Telbase::~Telbase(){
@@ -57,12 +58,13 @@ void Telbase::createAbonent(const char* name, unsigned long telHome, unsigned lo
 	
 	Abonent* abonent = new Abonent(name, telHome, telWork, otherInfo);
 	if (countObj) {
-		Abonent* ptrTemp = ptrAbonent;
-		ptrAbonent->setPtrNextObj(ptrTemp);
+		ptrAbonent->setPtrNextObj(abonent);
 		ptrAbonent = abonent;
+
 	}
 	else {
 		ptrAbonent = abonent;
+		ptrStartAbonent = abonent;
 	}
 	countObj++;
 }
@@ -74,4 +76,19 @@ void Telbase::changeTelephone(unsigned long telHome_telWork, int keys){
 }
 void Telbase::changeOtherInfo(const std::string otherInfo){
 	ptrAbonent->setInfo(otherInfo);
+}
+
+void Telbase::getAbonent()
+{
+	if (countObj == 1)
+		ptrStartAbonent->to_string();
+	else {
+		ptrStartAbonent->to_string();
+		Abonent* ptrTmp = ptrStartAbonent->getNextObj();
+		for (int i = 0; i < countObj; i++) {
+			ptrTmp->to_string();
+			Abonent* ptrTmp2 = ptrTmp;
+			ptrTmp = ptrTmp2->getNextObj();
+		}
+	}
 }

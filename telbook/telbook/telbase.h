@@ -18,13 +18,14 @@ public:
 	void setTel(unsigned long telephone, int keys);
 	void setInfo(const std::string otherInfo);
 	void setPtrNextObj(Abonent* ptr) { ptr_next_Obj_ = ptr; };
-	void sh(){std::cout << name_ << " " << telHome_ << " " << telWork_ << " " << otherInfo_ << '\n';};
-	
+	void to_string() const{std::cout << name_ << " " << telHome_ << " " << telWork_ << " " << otherInfo_ << '\n';};
+	Abonent* getNextObj() const { return ptr_next_Obj_; };
 };
 class Telbase
 {
 private:
 	int countObj;
+	Abonent* ptrStartAbonent;
 	Abonent* ptrAbonent;
 public:
 	Telbase();
@@ -35,8 +36,8 @@ public:
 	void changeOtherInfo(const std::string otherInfo);
 	//void deleteAbonent();
 	//void showAbonent();
-	void getAbonent(){ ptrAbonent->sh(); }
-
+	void getAbonent();
+	int getCount() { return countObj; }
 
 };
 
