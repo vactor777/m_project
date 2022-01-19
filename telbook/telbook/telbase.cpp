@@ -1,5 +1,8 @@
+#pragma warning(disable : 4996) //для visual studio
 #include "telbase.h"
 #include <cstring>
+
+ 
 Abonent::Abonent()
 {
 	name_ = new char[1];
@@ -9,7 +12,7 @@ Abonent::Abonent()
 	ptr_next_Obj_ = nullptr;
 }
 
-Abonent::Abonent(const char* name, ulong telHome, ulong telWork, std::string otherInfo)
+Abonent::Abonent(const char* name, unsigned long telHome, unsigned long telWork, std::string otherInfo)
 {
 	int len = strlen(name);
 	name_ = new char[len + 1];
@@ -30,7 +33,7 @@ void Abonent::setName(const char* name){
 	name_ = new char[len + 1];
 	strcpy(name_, name);
 }
-void Abonent::setTel(ulong telephone, int keys){
+void Abonent::setTel(unsigned long telephone, int keys){
 	if (keys == 0)
 		telHome_ = telephone;
 	else
@@ -50,19 +53,23 @@ Telbase::~Telbase(){
 	
 	//delete ptrAbonent;
 }
-void Telbase::createAbonent(const char* name,ulong telHome, ulong telWork, std::string otherInfo){
-	if (!countObj)
-		ptrAbonent->setPtrNextObj();
-	Abonent* abonent = new Abonent(name, telHome, telWork, otherInfo);
+void Telbase::createAbonent(const char* name, unsigned long telHome, unsigned long telWork, std::string otherInfo){
 	
-
-	ptrAbonent = abonent; 
+	Abonent* abonent = new Abonent(name, telHome, telWork, otherInfo);
+	if (countObj) {
+		Abonent* ptrTemp = ptrAbonent;
+		ptrAbonent->setPtrNextObj(ptrTemp);
+		ptrAbonent = abonent;
+	}
+	else {
+		ptrAbonent = abonent;
+	}
 	countObj++;
 }
 void Telbase::changeName(const char* name){
 	ptrAbonent->setName(name);
 }
-void Telbase::changeTelephone(ulong telHome_telWork, int keys){
+void Telbase::changeTelephone(unsigned long telHome_telWork, int keys){
 	ptrAbonent->setTel(telHome_telWork, keys);
 }
 void Telbase::changeOtherInfo(const std::string otherInfo){
