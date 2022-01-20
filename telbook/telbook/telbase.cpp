@@ -3,8 +3,7 @@
 #include <cstring>
 
  
-Abonent::Abonent()
-{
+Abonent::Abonent(){
 	name_ = new char[1];
 	name_[0] = '\0';
 	telHome_ = telWork_ = 0;
@@ -13,13 +12,10 @@ Abonent::Abonent()
 }
 
 Abonent::Abonent(const char* name, unsigned long telHome, unsigned long telWork, std::string otherInfo)
-{
+	: telHome_ (telHome), telWork_ (telWork), otherInfo_ (otherInfo){
 	int len = strlen(name);
 	name_ = new char[len + 1];
 	strcpy(name_, name);
-	telHome_ = telHome;
-	telWork_ = telWork;
-	otherInfo_ = otherInfo;
 	ptr_next_Obj_ = nullptr;
 }
 
