@@ -12,7 +12,7 @@ private:
 	Abonent* ptr_next_Obj_;
 public:
 	Abonent();
-	//сделать инициализаторы
+	//пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 	Abonent(const char* name, unsigned long telHome, unsigned long telWork, std::string otherInfo);
 	~Abonent();
 	void setName(const char* name);
@@ -21,7 +21,7 @@ public:
 	inline void setPtrNextObj(Abonent* ptr) { ptr_next_Obj_ = ptr; };
 	inline Abonent* getNextObj() const { return ptr_next_Obj_; };
 	inline char* getName() const { return name_; };
-	void to_string() const;
+	void to_string() const;//change to return function
 };
 
 class Telbase
@@ -39,11 +39,10 @@ public:
 	void changeOtherInfo(const char* name, const std::string otherInfo);
 	Abonent* findAbonent(const char* name);
 	void deleteAbonent(const char* name);
-	//void showAbonent();
 	void getAbonent();
 	int getCount() { return countObj; }
 	void writeToFile();
-	void readToFile();
+	//void readToFile();
 	
 
 };

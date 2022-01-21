@@ -1,8 +1,9 @@
-#pragma warning(disable : 4996) //для visual studio
+#pragma warning(disable : 4996) //for visual studio
+#include <fstream>
 #include "telbase.h"
+
 #include <cstring>
 
- 
 Abonent::Abonent(){
 	name_ = new char[1];
 	name_[0] = '\0';
@@ -99,14 +100,16 @@ Abonent* Telbase::findAbonent(const char* name)
 	for (int i = 0; i < countObj; i++) {
 		char* strTmp = ptrTmp->getName();
 		if (strcmp(name, strTmp) == 0)
-			return ptrTmp;//пока выход, но можно продолжить если есть с одинаковыми именами абоненты
+			return ptrTmp;
 		Abonent* ptrTmp2 = ptrTmp;
 		ptrTmp = ptrTmp2->getNextObj();
 	}
 	if (count)
 		return nullptr;
+	else
+		return nullptr;	
 }
-//соединить поиск и удаление сделать одну функцию по поиску в private поле
+
 void Telbase::deleteAbonent(const char* name)
 {
 	Abonent* ptrTmp = ptrStartAbonent;
@@ -114,14 +117,14 @@ void Telbase::deleteAbonent(const char* name)
 	for (int i = 0; i < countObj; i++) {
 		char* strTmp = ptrTmp->getName();
 		if (strcmp(name, strTmp) == 0) {
-			//если удаляем первого абонента
+			
 			if (i == 0) {
 				ptrStartAbonent = ptrStartAbonent->getNextObj();
 				delete ptrTmp;
 				countObj--;
 				return;
 			}
-			//если удаляем последнео абонента
+			
 			if (i == (countObj -1)) {
 				ptrOld->setPtrNextObj(nullptr);
 				ptrAbonent = ptrOld;
@@ -132,7 +135,7 @@ void Telbase::deleteAbonent(const char* name)
 		    ptrOld->setPtrNextObj(ptrTmp->getNextObj());
 			delete ptrTmp;
 			countObj--;
-			return;//пока выход, но можно продолжить если есть с одинаковыми именами абоненты
+			return;
 		}
 		Abonent* ptrTmp2 = ptrTmp;
 		ptrOld = ptrTmp2;
@@ -153,7 +156,24 @@ void Telbase::getAbonent()
 		for (int i = 0; i < countObj; i++) {
 			ptrTmp->to_string();
 			Abonent* ptrTmp2 = ptrTmp;
-			ptrTmp = ptrTmp2->getNextObj();
+			ptrTmp = ptrTmp->getNextObj();
 		}
 	}
 }
+/*
+void Telbase::writeToFile(){
+	using std::ofstream;
+	ofstream fout;
+	fout.open("baseabonent.txt");
+	if (countObj == 1)
+		ptrStartAbonent->to_string();
+	else {
+		Abonent* ptrTmp = ptrStartAbonent;
+		for (int i = 0; i < countObj; i++) {
+			ptrTmp->to_string();
+		///	Abonent* ptrTmp2 = ptrTmp;
+			ptrTmp = ptrTmp->getNextObj();
+		}
+	}
+}
+*/

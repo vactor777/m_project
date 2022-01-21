@@ -1,12 +1,12 @@
 #include <iostream>
 #include "telbase.h"
-
+#include "command_iterface.h"
 int main() {
 	//g
 
 	using std::cout;
 	using std::endl;
-	
+	/*
 	Telbase my;
 	my.createAbonent("Viktor Viktorovich");
 	my.createAbonent("Stepan");
@@ -33,6 +33,9 @@ int main() {
 	cout << endl;
 	my.getAbonent();
 	cout << "object count " << my.getCount() << endl;
+	*/
+	Comand cll;
+	cll.startProgram();
 
 	return 0;
 }
