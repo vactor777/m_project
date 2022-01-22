@@ -8,4 +8,6 @@ x64/
 .vs/
 /telbook/a.out
 /telbook/telbase.h.gch
+/telbook/command_interface.h.gch
+/telbook/baseabonent.txt
 
