@@ -43,11 +43,11 @@ void Abonent::setInfo(const std::string otherInfo){
 
 void Abonent::to_string() const
 {
-	std::cout << "Name: " << name_ << std::endl;
-//	std::cout << "Home Telephone: " << telHome_ << std::endl;
-//	std::cout << "Work Telephone: " << telWork_ << std::endl;
-//	std::cout << "Other Info: " << otherInfo_ << std::endl;
-//	std::cout << std::endl;
+	std::cout << "Name: " << name_;
+//	std::cout << ", Home Telephone: " << telHome_;
+//	std::cout << ", Work Telephone: " << telWork_;
+//	std::cout << ", Other Info: " << otherInfo_;
+	std::cout << std::endl;
 }
 
 //CLass Telbase
