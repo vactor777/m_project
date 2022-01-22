@@ -41,6 +41,11 @@ void Comand::startProgram(){
             {
                 deletedAbonent(objProgram, command);
             }
+                break;
+            case write:
+            {
+                writeToFile(objProgram, command);
+            }
                 break;        
             case unknown:
                 std::cout << "unknown comand\n";
@@ -108,6 +113,13 @@ void Comand::deletedAbonent(Telbase& obj, std::string& command)
     obj.deleteAbonent(tmp);
     delete[] tmp;
 }
+void Comand::writeToFile(Telbase& obj, std::string& command)
+{
+    if (command == "write --")
+        obj.writeToFile();
+    else
+        std::cout << "Operation incorrect\n";
+}
 Com Comand::findCommand(const std::string& com){
     Com tmp = unknown;
     if (com == "close")
@@ -115,8 +127,9 @@ Com Comand::findCommand(const std::string& com){
     std::string tmpStr = "";
     for (int i = 0; com[i] != ' '; i++)
         tmpStr+=com[i];
-    std::string command_str[8]{"help", "add", "change", "show", "allshow","deleted", "unknown", "close"};
-    for (int i = 0; i < 6; i++)
+    const int size = 9;    
+    std::string command_str[size]{"help", "add", "change", "show", "allshow","deleted", "write", "unknown", "close"};
+    for (int i = 0; i < size; i++)
         if (tmpStr == command_str[i])
             tmp = Com(i);
     return tmp;

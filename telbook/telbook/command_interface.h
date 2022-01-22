@@ -2,7 +2,7 @@
 #define COMMAND_INTERFACE_H
 #include "telbase.h"
 
-enum Com{help, add, change, show, allshow, deleted, unknown, close};//enum command
+enum Com{help, add, change, show, allshow, deleted, write, unknown, close};//enum command
 
 class Comand{
 //private:
@@ -18,6 +18,7 @@ public:
     void allshowComand(Telbase& obj, std::string& command);
     void showAbonent();
     void deletedAbonent(Telbase& obj, std::string& command);
+    void writeToFile(Telbase& obj, std::string& command);
 };
 
 
