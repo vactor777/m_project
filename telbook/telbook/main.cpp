@@ -3,7 +3,7 @@
 #include "command_interface.h"
 int main() {
 	//g
-
+	
 	using std::cout;
 	using std::endl;
 	/*
@@ -23,7 +23,7 @@ int main() {
 	my.createAbonent("alex Braunford");
 	my.createAbonent("gg");
 	my.changeName("Viktor", "Mitja");
-	my.changeTelephone("Stepan", 865456);
+	my.changeTelephone("Stepan", "865456");
 	my.getAbonent();
 	cout << "object count " << my.getCount() << endl;
 	my.deleteAbonent("Mitja");
@@ -33,6 +33,7 @@ int main() {
 	cout << endl;
 	my.getAbonent();
 	cout << "object count " << my.getCount() << endl;
+	my.writeToFile();
 	*/
 	Comand cll;
 	cll.startProgram();
