@@ -1,4 +1,4 @@
-#include "command_iterface.h"
+#include "command_interface.h"
 //#include <cstring>
 #include "telbase.h"
 void Comand::startProgram(){
@@ -82,7 +82,7 @@ void Comand::createAbonCommand(Telbase& obj, std::string& command)
 void Comand::allshowComand(Telbase& obj, std::string& command)
 {
     if (command == "allshow --")
-        obj.getAbonent();
+        obj.getAbonent();//change to_tsring return string
     else
         std::cout << "Operation incorrect\n";
 }

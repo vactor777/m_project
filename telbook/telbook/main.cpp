@@ -1,6 +1,6 @@
 #include <iostream>
 #include "telbase.h"
-#include "command_iterface.h"
+#include "command_interface.h"
 int main() {
 	//g
 
