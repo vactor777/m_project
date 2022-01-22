@@ -43,6 +43,7 @@ public:
 	void getAbonent();
 	int getCount() { return countObj; }
 	void writeToFile();
+	void readToFile();
 	//void readToFile();
 	
 
