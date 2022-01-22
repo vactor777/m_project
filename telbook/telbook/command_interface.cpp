@@ -1,23 +1,25 @@
 #include "command_iterface.h"
 //#include <cstring>
+#include "telbase.h"
 void Comand::startProgram(){
+    Telbase objProgram;
     bool flag = true;
     while(flag){
         std::cout << "enter command: ";
         std::string command;
         getline(std::cin,command);
         Com chek;
-        chek = findComand(command);
+        chek = findCommand(command);
         switch (chek)
         {
             case help:
             {
-                std::cout << "it is help\n";
+                helpCommand(command);
             }
             break;
             case add:
             {
-                std::cout << "it is add\n";
+                createAbonCommand(objProgram, command);
             }
             break;
             case change:
@@ -32,7 +34,7 @@ void Comand::startProgram(){
                 break;
             case allshow:
             {
-                std::cout << "it is allshow\n";
+                allshowComand(objProgram, command);
             }
                 break;            
             case unknown:
@@ -45,7 +47,47 @@ void Comand::startProgram(){
     }
 }
 
-Com Comand::findComand(std::string& com){
+void Comand::helpCommand(const std::string& command)
+{
+    if (command == "help --") {
+        std::cout << "Help about comand\n";
+        std::cout << "command help -- (help about program)\n";
+        std::cout << "command add (add [nameabonent])\n";
+        std::cout << "command change (change [nameabonent] [newnameabonent]) \n";
+        std::cout << "command show (show [nameabonent])\n";
+        std::cout << "command allshow -- (show all abonent)\n";
+        std::cout << "command close (close program)\n";
+    }
+    else 
+        std::cout << "Operation incorrect\n";
+}
+
+void Comand::createAbonCommand(Telbase& obj, std::string& command)
+{
+    std::string strtmp = "";
+    for (int i = 1; i < command.length(); i++)
+        if (command[i - 1] == ' ')
+            for (int j = i; j < command.length(); j++, i++)
+                strtmp += command[j];
+    //std::cout << strtmp << std::endl;
+    int len = strtmp.length();
+    char* tmp = new char[len + 1];
+    for (int i = 0; i < len; i++)
+        tmp[i] = strtmp[i];
+    tmp[len] = '\0';
+    obj.createAbonent(tmp);
+    delete[] tmp;
+}
+
+void Comand::allshowComand(Telbase& obj, std::string& command)
+{
+    if (command == "allshow --")
+        obj.getAbonent();
+    else
+        std::cout << "Operation incorrect\n";
+}
+
+Com Comand::findCommand(const std::string& com){
     Com tmp = unknown;
     if (com == "close")
         return close;

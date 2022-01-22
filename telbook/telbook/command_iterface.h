@@ -11,12 +11,12 @@ class Comand{
 public:
     //command
  
-    Com findComand(std::string& com);
+    Com findCommand(const std::string& com);
     void startProgram();
-
+    void helpCommand(const std::string& command);
+    void createAbonCommand(Telbase& obj, std::string& command);
+    void allshowComand(Telbase& obj, std::string& command);
 };
-
- 
 
 
 #endif
