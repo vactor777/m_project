@@ -7,12 +7,12 @@
 Abonent::Abonent(){
 	name_ = new char[1];
 	name_[0] = '\0';
-	telHome_ = telWork_ = 0;
+	telHome_ = telWork_ = "000";
 	otherInfo_ = "empty";
 	ptr_next_Obj_ = nullptr;
 }
 
-Abonent::Abonent(const char* name, unsigned long telHome, unsigned long telWork, std::string otherInfo)
+Abonent::Abonent(const char* name, std::string telHome, std::string telWork, std::string otherInfo)
 	: telHome_ (telHome), telWork_ (telWork), otherInfo_ (otherInfo){
 	int len = strlen(name);
 	name_ = new char[len + 1];
@@ -30,7 +30,7 @@ void Abonent::setName(const char* name){
 	name_ = new char[len + 1];
 	strcpy(name_, name);
 }
-void Abonent::setTel(unsigned long telephone, int keys){
+void Abonent::setTel(std::string telephone, int keys){
 	if (keys == 0)
 		telHome_ = telephone;
 	else
@@ -44,16 +44,16 @@ void Abonent::setInfo(const std::string otherInfo){
 void Abonent::to_string() const
 {
 	std::cout << "Name: " << name_;
-//	std::cout << ", Home Telephone: " << telHome_;
-//	std::cout << ", Work Telephone: " << telWork_;
-//	std::cout << ", Other Info: " << otherInfo_;
+	std::cout << ", Home Telephone: " << telHome_;
+	std::cout << ", Work Telephone: " << telWork_;
+	std::cout << ", Other Info: " << otherInfo_;
 	std::cout << std::endl;
 }
 std::string Abonent::to_string(int keys) const 
 {
     std::string st = name_;
-	return "Name: " + st + ", Home telephone: " + std::to_string(telHome_)
-	+ ", Work Telephone: " + std::to_string(telWork_) + ", Other Info: " + otherInfo_;// +"\n";
+	return "Name: " + st + ", Home telephone: " + telHome_
+	+ ", Work Telephone: " + telWork_ + ", Other Info: " + otherInfo_;// +"\n";
 }
 //CLass Telbase
 Telbase::Telbase(){
@@ -62,7 +62,7 @@ Telbase::Telbase(){
 	countObj = 0;
 }
 Telbase::~Telbase(){}
-void Telbase::createAbonent(const char* name, unsigned long telHome, unsigned long telWork, std::string otherInfo){
+void Telbase::createAbonent(const char* name, std::string telHome, std::string telWork, std::string otherInfo){
 	
 	Abonent* abonent = new Abonent(name, telHome, telWork, otherInfo);
 	if (countObj) {
@@ -82,7 +82,7 @@ void Telbase::changeName(const char* name, const char* new_name){
 		return;
 	ptrTmp->setName(new_name);
 }
-void Telbase::changeTelephone(const char* name, unsigned long telHome_telWork, int keys){
+void Telbase::changeTelephone(const char* name, std::string telHome_telWork, int keys){
 	Abonent* ptrTmp = findAbonent(name);
 	if (ptrTmp == nullptr)
 		return;
