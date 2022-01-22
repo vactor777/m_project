@@ -62,18 +62,15 @@ void Comand::startProgram(){
 
 void Comand::helpCommand(const std::string& command)
 {
-    if (command == "help --") {
         std::cout << "Help about comand\n";
-        std::cout << "command help -- (help about program)\n";
+        std::cout << "command --help (help about program)\n";
         std::cout << "command add [nameabonent] (add new abonent)\n";
         std::cout << "command change [nameabonent] [newnameabonent] (change abonent)\n";
         std::cout << "command show [nameabonent] (show abonent)\n";
-        std::cout << "command allshow -- (show all abonent)\n";
+        std::cout << "command allshow (show all abonent)\n";
         std::cout << "command close (close program)\n";
         std::cout << "command deleted [nameabonent] (deleted abonent)\n";
-    }
-    else 
-        std::cout << "Operation incorrect\n";
+        std::cout << "command write (write abonent to file)\n";
 }
 
 void Comand::createAbonCommand(Telbase& obj, std::string& command)
@@ -92,14 +89,7 @@ void Comand::createAbonCommand(Telbase& obj, std::string& command)
     obj.createAbonent(tmp);
     delete[] tmp;
 }
-
-void Comand::allshowComand(Telbase& obj, std::string& command)
-{
-    if (command == "allshow --")
-        obj.getAbonent();//change to_tsring return string
-    else
-        std::cout << "Operation incorrect\n";
-}
+void Comand::allshowComand(Telbase& obj, std::string& command){obj.getAbonent();}
 void Comand::deletedAbonent(Telbase& obj, std::string& command)
 {
     std::string strtmp = "";
@@ -116,22 +106,23 @@ void Comand::deletedAbonent(Telbase& obj, std::string& command)
     obj.deleteAbonent(tmp);
     delete[] tmp;
 }
-void Comand::writeToFile(Telbase& obj, std::string& command)
-{
-    if (command == "write --")
-        obj.writeToFile();
-    else
-        std::cout << "Operation incorrect\n";
-}
+void Comand::writeToFile(Telbase& obj, std::string& command) {obj.writeToFile();}
 Com Comand::findCommand(const std::string& com){
     Com tmp = unknown;
-    if (com == "close")
-        return close;
     std::string tmpStr = "";
+    int counSpace = 0;
+    for (int i = 0; i < com.length(); i++)
+        if (com[i] == ' ')
+            counSpace++;
+    if (!counSpace){
+        tmpStr = com;
+    }
+    else{
     for (int i = 0; com[i] != ' '; i++)
         tmpStr+=com[i];
+    }
     const int size = 9;    
-    std::string command_str[size]{"help", "add", "change", "show", "allshow","deleted", "write", "unknown", "close"};
+    std::string command_str[size]{"--help", "add", "change", "show", "allshow","deleted", "write", "unknown", "close"};
     for (int i = 0; i < size; i++)
         if (tmpStr == command_str[i])
             tmp = Com(i);
@@ -151,6 +142,7 @@ void Comand::showAbonent(Telbase& obj, std::string& command)
         tmp[i] = strtmp[i];
     tmp[len] = '\0';
     Abonent* ptr = obj.findAbonent(tmp);
-    std::cout << ptr->to_string(1) << std::endl;
+    if (ptr != nullptr)
+       std::cout << ptr->to_string(1) << std::endl;
     delete[] tmp;
 }
