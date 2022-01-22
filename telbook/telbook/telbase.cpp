@@ -49,17 +49,19 @@ void Abonent::to_string() const
 //	std::cout << ", Other Info: " << otherInfo_;
 	std::cout << std::endl;
 }
-
+std::string Abonent::to_string(int keys) const 
+{
+    std::string st = name_;
+	return "Name: " + st + ", Home telephone: " + std::to_string(telHome_)
+	+ ", Work Telephone: " + std::to_string(telWork_) + ", Other Info: " + otherInfo_;// +"\n";
+}
 //CLass Telbase
 Telbase::Telbase(){
 	ptrAbonent = nullptr;
 	ptrStartAbonent = nullptr;
 	countObj = 0;
 }
-Telbase::~Telbase(){
-	
-	//delete ptrAbonent;
-}
+Telbase::~Telbase(){}
 void Telbase::createAbonent(const char* name, unsigned long telHome, unsigned long telWork, std::string otherInfo){
 	
 	Abonent* abonent = new Abonent(name, telHome, telWork, otherInfo);
@@ -160,20 +162,21 @@ void Telbase::getAbonent()
 		}
 	}
 }
-/*
+
 void Telbase::writeToFile(){
 	using std::ofstream;
 	ofstream fout;
 	fout.open("baseabonent.txt");
 	if (countObj == 1)
-		ptrStartAbonent->to_string();
+		fout << ptrStartAbonent->to_string(1) << std::endl;
 	else {
 		Abonent* ptrTmp = ptrStartAbonent;
 		for (int i = 0; i < countObj; i++) {
-			ptrTmp->to_string();
+			fout << ptrTmp->to_string(1) << std::endl;
 		///	Abonent* ptrTmp2 = ptrTmp;
 			ptrTmp = ptrTmp->getNextObj();
 		}
 	}
+	fout.close();
 }
-*/
+

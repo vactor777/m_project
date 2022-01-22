@@ -24,7 +24,7 @@ void Comand::startProgram(){
             break;
             case change:
             {
-                std::cout << "it is change\n";
+                std::cout << "under development\n";
             }
             break;
             case show:
