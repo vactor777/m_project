@@ -8,6 +8,9 @@ void Comand::startProgram(){
         std::cout << "enter command: ";
         std::string command;
         getline(std::cin,command);
+        if (command[command.length()-1] == ' ')
+            for (int i = command.length()-1; command[i] == ' '; i--)
+                command = command.substr(0, command.size() -1);
         Com chek;
         chek = findCommand(command);
         switch (chek)
