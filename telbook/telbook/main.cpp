@@ -38,5 +38,5 @@ int main() {
 	Comand cll;
 	cll.startProgram();
 
-	return 0;865456
+	return 0;
 }

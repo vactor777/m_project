@@ -29,7 +29,7 @@ void Comand::startProgram(){
             break;
             case show:
             {
-                std::cout << "under development\n";
+                showAbonent(objProgram, command);
             }
                 break;
             case allshow:
@@ -133,4 +133,21 @@ Com Comand::findCommand(const std::string& com){
         if (tmpStr == command_str[i])
             tmp = Com(i);
     return tmp;
+}
+void Comand::showAbonent(Telbase& obj, std::string& command)
+{
+    std::string strtmp = "";
+    for (int i = 1; i < command.length(); i++)
+        if (command[i - 1] == ' ')
+            for (int j = i; j < command.length(); j++, i++)
+                strtmp += command[j];
+    //std::cout << strtmp << std::endl;
+    int len = strtmp.length();
+    char* tmp = new char[len + 1];
+    for (int i = 0; i < len; i++)
+        tmp[i] = strtmp[i];
+    tmp[len] = '\0';
+    Abonent* ptr = obj.findAbonent(tmp);
+    std::cout << ptr->to_string(1) << std::endl;
+    delete[] tmp;
 }

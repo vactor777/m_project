@@ -16,7 +16,7 @@ public:
     void helpCommand(const std::string& command);
     void createAbonCommand(Telbase& obj, std::string& command);
     void allshowComand(Telbase& obj, std::string& command);
-    void showAbonent();
+    void showAbonent(Telbase& obj, std::string& command);
     void deletedAbonent(Telbase& obj, std::string& command);
     void writeToFile(Telbase& obj, std::string& command);
 };
