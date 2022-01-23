@@ -37,7 +37,7 @@ public:
 	void changeName(const char* name, const char* new_name);
 	void changeTelephone(const char* name, std::string telHome_telWork, int keys = 0);
 	void changeOtherInfo(const char* name, const std::string otherInfo);
-	Abonent* findAbonent(const char* name);
+	Abonent* findAbonent(const char* name) const;
 	void deleteAbonent(const char* name);
 	void getAbonent();
 	int getCount() { return countObj; }

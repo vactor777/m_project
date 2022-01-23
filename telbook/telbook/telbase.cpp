@@ -95,7 +95,7 @@ void Telbase::changeOtherInfo(const char* name, const std::string otherInfo){
 	ptrTmp->setInfo(otherInfo);
 }
 
-Abonent* Telbase::findAbonent(const char* name)
+Abonent* Telbase::findAbonent(const char* name) const
 {
 	Abonent* ptrTmp = ptrStartAbonent;
 	bool count = true;
