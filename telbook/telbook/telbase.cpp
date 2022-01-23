@@ -24,22 +24,22 @@ Abonent::~Abonent()
 {
 	delete[] name_;
 }
+
 void Abonent::setName(const char* name){
 	int len = strlen(name);
 	delete name_;
 	name_ = new char[len + 1];
 	strcpy(name_, name);
 }
+
 void Abonent::setTel(std::string telephone, int keys){
 	if (keys == 0)
 		telHome_ = telephone;
 	else
 		telWork_ = telephone;
+}
 
-}
-void Abonent::setInfo(const std::string otherInfo){
-	otherInfo_ = otherInfo;
-}
+void Abonent::setInfo(const std::string otherInfo){otherInfo_ = otherInfo;}
 
 void Abonent::to_string() const
 {
@@ -49,26 +49,23 @@ void Abonent::to_string() const
 	std::cout << ", Other Info: " << otherInfo_;
 	std::cout << std::endl;
 }
-std::string Abonent::to_string(int keys) const 
+
+std::string Abonent::to_string(int anyKeys) const 
 {
     std::string st = name_;
 	return "Name: " + st + ", Home telephone: " + telHome_
 	+ ", Work Telephone: " + telWork_ + ", Other Info: " + otherInfo_;// +"\n";
 }
+
+
 //CLass Telbase
-Telbase::Telbase(){
-	ptrAbonent = nullptr;
-	ptrStartAbonent = nullptr;
-	countObj = 0;
-}
+Telbase::Telbase(){	ptrAbonent = nullptr; ptrStartAbonent = nullptr; countObj = 0;}
 Telbase::~Telbase(){}
 void Telbase::createAbonent(const char* name, std::string telHome, std::string telWork, std::string otherInfo){
-	
 	Abonent* abonent = new Abonent(name, telHome, telWork, otherInfo);
 	if (countObj) {
 		ptrAbonent->setPtrNextObj(abonent);
 		ptrAbonent = abonent;
-
 	}
 	else {
 		ptrAbonent = abonent;
@@ -76,18 +73,21 @@ void Telbase::createAbonent(const char* name, std::string telHome, std::string t
 	}
 	countObj++;
 }
+
 void Telbase::changeName(const char* name, const char* new_name){
 	Abonent* ptrTmp = findAbonent(name);
 	if (ptrTmp == nullptr)
 		return;
 	ptrTmp->setName(new_name);
 }
+
 void Telbase::changeTelephone(const char* name, std::string telHome_telWork, int keys){
 	Abonent* ptrTmp = findAbonent(name);
 	if (ptrTmp == nullptr)
 		return;
 	ptrTmp->setTel(telHome_telWork, keys);
 }
+
 void Telbase::changeOtherInfo(const char* name, const std::string otherInfo){
 	Abonent* ptrTmp = findAbonent(name);
 	if (ptrTmp == nullptr)
@@ -126,7 +126,6 @@ void Telbase::deleteAbonent(const char* name)
 				countObj--;
 				return;
 			}
-			
 			if (i == (countObj -1)) {
 				ptrOld->setPtrNextObj(nullptr);
 				ptrAbonent = ptrOld;
@@ -173,7 +172,6 @@ void Telbase::writeToFile(){
 		Abonent* ptrTmp = ptrStartAbonent;
 		for (int i = 0; i < countObj; i++) {
 			fout << ptrTmp->to_string(1) << std::endl;
-		///	Abonent* ptrTmp2 = ptrTmp;
 			ptrTmp = ptrTmp->getNextObj();
 		}
 	}

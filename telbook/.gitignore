@@ -6,6 +6,7 @@ telbook.sln
 x64/
 /telbook/.vs/
 .vs/
+.vscode/
 /telbook/a.out
 /telbook/telbase.h.gch
 /telbook/command_interface.h.gch

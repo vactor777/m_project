@@ -12,7 +12,6 @@ private:
 	Abonent* ptr_next_Obj_;
 public:
 	Abonent();
-	//������� ��������������
 	Abonent(const char* name, std::string telHome, std::string telWork, std::string otherInfo);
 	~Abonent();
 	void setName(const char* name);
@@ -22,7 +21,7 @@ public:
 	inline Abonent* getNextObj() const { return ptr_next_Obj_; };
 	inline char* getName() const { return name_; };
 	void to_string() const;//change to return function
-	std::string to_string(int keys) const ;
+	std::string to_string(int anyKeys) const ;
 };
 
 class Telbase
@@ -45,8 +44,6 @@ public:
 	void writeToFile();
 	void readToFile();
 	//void readToFile();
-	
-
 };
 
 #endif
