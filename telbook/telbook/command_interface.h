@@ -6,6 +6,10 @@ enum Com{help, add, change, show, allshow, deleted, write, read, unknown, close}
 
 class Comand{
     int findKey(const std::string& command, const std::string& key) const;
+    char* findName(const std::string& command) const;
+    std::string findName(const std::string& command, int startpos, char symb) const;
+    std::string findName(const std::string& command, int startpos) const;
+    enum Key { name_, hometel_, worktel_, other_ };
 public:
     Com findCommand(const std::string& com);
     void startProgram();
