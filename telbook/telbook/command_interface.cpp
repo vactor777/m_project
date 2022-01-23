@@ -83,19 +83,36 @@ void Comand::helpCommand(const std::string& command)
 
 void Comand::createAbonCommand(Telbase& obj, const std::string& command)
 {
-	Key keys_;
+	//Key keys_;
 	const int sizeK = 4;
 	int positionKey_n = 0;
-	int countKeys = 1;
-	std::string keys[sizeK]{ "-n", "-h", "-w", "-o" };
+	int countKeys = 0;
+	std::string keys[4]{ "-n", "-h", "-w", "-o" };
 	for (int i = 1; i < sizeK; i++) {
 		positionKey_n = findKey(command, keys[i]);
-		if (positionKey_n != -1) {
-			keys_ = Key(i);
-			countKeys++;
+		if (positionKey_n != -1) { break; }
+	}
+	std::string com = command;
+	if (positionKey_n != -1) {
+		com.clear();
+		for (int i = 0; i < positionKey_n - 3; i++) { com += command[i]; }
+	}
+	char* tmp = findName(com);
+	obj.createAbonent(tmp);
+	delete[] tmp;
+	//считаем колво ключей
+	if (positionKey_n != -1) {
+		for (int i = 1; i < sizeK; i++) {
+			positionKey_n = findKey(command, keys[i]);
+			if (positionKey_n != -1) { countKeys++; }
 		}
 	}
-	
+	std::cout << "keys = " << countKeys << std::endl;
+	//определяем что меняет первый ключ меняем черк changeAbonent
+	// и т.д
+
+
+	/*
 	switch (countKeys)
 	{
 	case 1:
@@ -212,6 +229,7 @@ void Comand::createAbonCommand(Telbase& obj, const std::string& command)
 	break;
 
 	}
+	*/
 }
 
 void Comand::allshowComand(Telbase& obj, const std::string& command) { obj.getAbonent(); }
