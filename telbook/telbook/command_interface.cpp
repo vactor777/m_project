@@ -107,6 +107,9 @@ void Comand::deletedAbonent(Telbase& obj, std::string& command)
     delete[] tmp;
 }
 void Comand::writeToFile(Telbase& obj, std::string& command) {obj.writeToFile();}
+void readTofille(){
+    
+}
 Com Comand::findCommand(const std::string& com){
     Com tmp = unknown;
     std::string tmpStr = "";

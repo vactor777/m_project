@@ -19,6 +19,7 @@ public:
     void showAbonent(Telbase& obj, std::string& command);
     void deletedAbonent(Telbase& obj, std::string& command);
     void writeToFile(Telbase& obj, std::string& command);
+    //void readTofille();
 };
 
 
