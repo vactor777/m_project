@@ -1,0 +1,14 @@
+telbook.sln
+/telbook/telbook.vcxproj
+/telbook/telbook.vcxproj.filters
+/telbook/telbook.vcxproj.user
+/telbook/x64
+x64/
+/telbook/.vs/
+.vs/
+.vscode/
+/telbook/a.out
+/telbook/telbase.h.gch
+/telbook/command_interface.h.gch
+/telbook/baseabonent.txt
+
