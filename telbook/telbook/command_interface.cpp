@@ -91,7 +91,7 @@ void Comand::helpCommand(const std::string& command)
 	std::cout << "command close (close program)\n";
 	std::cout << "command deleted [nameabonent] (deleted abonent)\n";
 	std::cout << "command write (write allabonent to file)\n";
-	std::cout << "command read (under development)\n";
+	std::cout << "command read (read file baseabonent.txt)\n";
 }
 
 void Comand::createAbonCommand(Telbase& obj, const std::string& command)
