@@ -4,7 +4,6 @@ telbook.sln
 /telbook/telbook.vcxproj.user
 /telbook/x64
 x64/
-/telbook/.vs/
 .vs/
 .vscode/
 /telbook/a.out

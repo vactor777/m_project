@@ -69,10 +69,13 @@ void Comand::helpCommand(const std::string& command)
 	std::cout << "Help about comand\n";
 	std::cout << "command --help (help about program)\n";
 	std::cout << "command add [nameabonent] (add new abonent)\n";
+	std::cout << "command add [nameabonent] [-h](add hometelephone)\n";
+	std::cout << "			  [nameabonent] [-h] [-w](add homeandworktelephone)\n";
+	std::cout << "			  [nameabonent] [-h] [-w] [-o](add homeandworktelephone and other info)\n";
 	std::cout << "command change [nameoldabonent] [-n] [namenewabonent] (change abonent)\n";
-	std::cout << "               [nameoldabonent] [-h] [changeHometelephone]\n";
-	std::cout << "               [nameoldabonent] [-w] [changeWorktelephone]\n";
-	std::cout << "               [nameoldabonent] [-w] [changeohtherinfo]\n";
+	std::cout << "               [nameoldabonent] [-h] (changeHometelephone)\n";
+	std::cout << "               [nameoldabonent] [-w] (changeWorktelephone)\n";
+	std::cout << "               [nameoldabonent] [-w] (changeohtherinfo)\n";
 	std::cout << "command show [nameabonent] (show abonent)\n";
 	std::cout << "command allshow (show all abonent)\n";
 	std::cout << "command close (close program)\n";
@@ -83,15 +86,31 @@ void Comand::helpCommand(const std::string& command)
 
 void Comand::createAbonCommand(Telbase& obj, const std::string& command)
 {
-	//Key keys_;
 	const int sizeK = 4;
 	int positionKey_n = 0;
 	int countKeys = 0;
+	int countKeysTmp = 0;
 	std::string keys[4]{ "-n", "-h", "-w", "-o" };
 	for (int i = 1; i < sizeK; i++) {
 		positionKey_n = findKey(command, keys[i]);
-		if (positionKey_n != -1) { break; }
+		if (positionKey_n != -1) { countKeysTmp++; break; }
 	}
+	
+	if (countKeysTmp){
+	//проверка на приритет ключей
+		int pos1 = findKey(command, keys[1]);
+		int pos2 = findKey(command, keys[2]);
+		int pos3 = findKey(command, keys[3]);
+		std::cout << "pos1 " << pos1 << ", pos2 " << pos2 << ", pos3" << pos3 << "\n";
+		bool zap = false;
+		if((pos3 != -1) && (pos3 < pos1 || pos3 < pos2) ){ zap = true;}
+		if((pos2 != -1) && pos2 < pos1){ zap = true; }
+		if(zap){
+			std::cout << "fail prior operation\n";
+			return;
+		}
+	}
+	//УТСАНАВЛИВАЕМ ПОЗИЦИЮ НА ПЕРВЫЙ КЛЮЧ
 	std::string com = command;
 	if (positionKey_n != -1) {
 		com.clear();
@@ -108,128 +127,67 @@ void Comand::createAbonCommand(Telbase& obj, const std::string& command)
 		}
 	}
 	std::cout << "keys = " << countKeys << std::endl;
-	//определяем что меняет первый ключ меняем черк changeAbonent
-	// и т.д
-
-
-	/*
-	switch (countKeys)
-	{
-	case 1:
-	{
-		char* tmp = findName(command);
-		obj.createAbonent(tmp);
-		delete[] tmp;
-	}
-	break;
-	case 2:
-	{
-		std::cout << "obj 2 pereg\n";
-		for (int i = 0; i < sizeK; i++) {
-			positionKey_n = findKey(command, keys[i]);
-			if (positionKey_n != -1) {
-				keys_ = Key(i);
-				break;
+	if (countKeys){
+		bool chekH, chekW, chekO;
+		chekH = chekW = chekO = true;
+		std::string modNewCommand = command;
+		Key keys_;
+		char* n = findName(com);
+		Abonent* ptrAbon = obj.findAbonent(n);
+		while (countKeys)
+		{
+			//узнаем ключь
+			for (int i = 1; i < sizeK; i++)
+			{
+				positionKey_n = findKey(modNewCommand, keys[i]);
+				if (positionKey_n != -1) 
+				{
+					keys_ = Key(i);
+					break;
+				}
 			}
-		}
-		std::string strtmp;
-		for (int i = 0; i < positionKey_n - 3; i++)
-			strtmp += command[i];
-
-		switch (keys_)
-		{
-		case hometel_:
-		{
-			std::string twoArg = findName(command, positionKey_n + 1, ' ');
-			char* tmp = findName(strtmp);
-			obj.createAbonent(tmp, twoArg);
-			delete[] tmp;
-		}
-		break;
-		case worktel_:
-		{
-			std::string twoArg = findName(command, positionKey_n + 1, ' ');
-			char* tmp = findName(strtmp);
-			obj.createAbonent(tmp, "000", twoArg);
-			delete[] tmp;
-		}
-		break;
-		case other_:
-		{
-			std::string twoArg;
-			for (int i = positionKey_n + 1; i < command.length(); i++) { twoArg += command[i]; }
-			char* tmp = findName(strtmp);
-			obj.createAbonent(tmp, "000", "000", twoArg);
-			delete[] tmp;
-		}
-		break;
-		}
-	}
-	break;
-	case 3:
-	{
-		Key keys_1, keys_2;
-		int positionKey_n1 = 0;
-		for (int i = 0; i < sizeK; i++) {
-			positionKey_n1 = findKey(command, keys[i]);
-			if (positionKey_n != -1) {
-				keys_1 = Key(i);
-				break;
+			switch (keys_)
+			{
+			case hometel_:
+			{
+				if(chekH){
+					std::string Arg = findName(modNewCommand, positionKey_n + 1, ' ');
+					ptrAbon->setTel(Arg, 0);
+					countKeys--;
+					chekH = false;
+				}
+			}	
+			break;
+			case worktel_:
+			{
+				if(chekW){
+					std::string Arg = findName(modNewCommand, positionKey_n + 1, ' ');
+					ptrAbon->setTel(Arg, 1);
+					countKeys--;
+					chekW = false;
+				}
 			}
-		}
-		int positionKey_n2 = 0;
-		std::string comModif = findName(command, positionKey_n1);
-		for (int i = 0; i < sizeK; i++) {
-			positionKey_n2 = findKey(comModif, keys[i]);
-			if (positionKey_n2 != -1) {
-				keys_2 = Key(i);
-				break;
+			break;
+			case other_:
+			{
+				if(chekO){
+					std::string Arg;
+					for (int i = positionKey_n + 1; i < modNewCommand.length(); i++) { Arg += modNewCommand[i]; }
+					ptrAbon->setInfo(Arg);
+					countKeys--;
+					chekO = false;
+					std::cout << "enter hereOOO\n";
+				}
 			}
+			break;
+			default:
+				std::cout << "operation incorrect\n";
+			
+			}
+			modNewCommand = findName(modNewCommand, positionKey_n + 1);
 		}
-		std::string strtmp;
-		for (int i = 0; i < positionKey_n1 - 3; i++)
-			strtmp += command[i];
-		switch (keys_1)
-		{
-		case hometel_:
-		{
-			std::string twoArg = findName(command, positionKey_n1 + 1, ' ');
-			std::string threeArg = findName(command, positionKey_n2 + 1, ' ');
-			char* tmp = findName(strtmp);
-			obj.createAbonent(tmp, twoArg);
-			delete[] tmp;
-		}
-		break;
-		case worktel_:
-		{
-			std::string twoArg = findName(command, positionKey_n + 1, ' ');
-			char* tmp = findName(strtmp);
-			obj.createAbonent(tmp, "000", twoArg);
-			delete[] tmp;
-		}
-		break;
-		case other_:
-		{
-			std::string twoArg;
-			for (int i = positionKey_n + 1; i < command.length(); i++) { twoArg += command[i]; }
-			char* tmp = findName(strtmp);
-			obj.createAbonent(tmp, "000", "000", twoArg);
-			delete[] tmp;
-		}
-		break;
-		}
-		std::cout << "obj 3 pereg\n";
+		delete[] n;
 	}
-	break;
-	case 4:
-	{
-		//ищем что за ключи и создаем объек с 4 перегрузками
-		std::cout << "obj 4 pereg\n";
-	}
-	break;
-
-	}
-	*/
 }
 
 void Comand::allshowComand(Telbase& obj, const std::string& command) { obj.getAbonent(); }
