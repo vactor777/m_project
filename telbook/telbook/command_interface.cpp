@@ -77,16 +77,17 @@ void Comand::startProgram() {
 void Comand::helpCommand(const std::string& command)
 {
 	std::cout << "Help about comand\n";
+	std::cout << "Keys [-n] [-n] record without []";
 	std::cout << "command --help (help about program)\n";
-	std::cout << "command add [nameabonent] (add new abonent)\n";
-	std::cout << "command add [nameabonent] [-h](add hometelephone)\n";
-	std::cout << "			  [nameabonent] [-h] [-w](add homeandworktelephone)\n";
-	std::cout << "			  [nameabonent] [-h] [-w] [-o](add homeandworktelephone and other info)\n";
-	std::cout << "command change [nameoldabonent] [-n] [namenewabonent] (change abonent)\n";
-	std::cout << "               [nameoldabonent] [-h] (changeHometelephone)\n";
-	std::cout << "               [nameoldabonent] [-w] (changeWorktelephone)\n";
-	std::cout << "               [nameoldabonent] [-w] (changeohtherinfo)\n";
-	std::cout << "command show [nameabonent] (show abonent)\n";
+	std::cout << "command add nameabonent (add new abonent)\n";
+	std::cout << "command add nameabonent [-h] number (add hometelephone)\n";
+	std::cout << "			  nameabonent [-h] number [-w] number (add homeandworktelephone)\n";
+	std::cout << "			  nameabonent [-h] number[-w] number [-o] anyinfo (add homeandworktelephone and other info)\n";
+	std::cout << "command change nameoldabonent [-n] namenewabonent (change abonent)\n";
+	std::cout << "               nameoldabonent [-h] number (changeHometelephone)\n";
+	std::cout << "               nameoldabonent [-w] number (changeWorktelephone)\n";
+	std::cout << "               nameoldabonent [-w] anyinfo (changeohtherinfo)\n";
+	std::cout << "command show nameabonent (show abonent)\n";
 	std::cout << "command allshow (show all abonent)\n";
 	std::cout << "command close (close program)\n";
 	std::cout << "command deleted [nameabonent] (deleted abonent)\n";
