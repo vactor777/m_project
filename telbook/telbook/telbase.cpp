@@ -178,3 +178,7 @@ void Telbase::writeToFile(){
 	fout.close();
 }
 
+void Telbase::readToFile(){
+	int countStr = 0;	
+}
+
