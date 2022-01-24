@@ -1,7 +1,7 @@
 #pragma warning(disable : 4996) //for visual studio
+
 #include <fstream>
 #include "telbase.h"
-
 #include <cstring>
 
 Abonent::Abonent(){
@@ -179,6 +179,51 @@ void Telbase::writeToFile(){
 }
 
 void Telbase::readToFile(){
-	int countStr = 0;	
+	using std::ifstream;
+	ifstream inFile;
+	inFile.open("baseabonent.txt");
+	if (!inFile.is_open()){
+		std::cout << "file unknown\n";
+		exit (EXIT_FAILURE);
+	}
+	else{
+		std::string command;
+		while (!inFile.eof())
+		{
+			command.clear();
+			getline(inFile, command);
+			if (command.empty())
+				continue;
+			//заменяем строку на строку команд
+			std::string newcom;
+			for (int i = 1; i < command.length(); i++)
+			{
+				if (command[i-1] == ':')
+				{
+					for (int j = i+1; j < command.length(); j++, i++)
+					{
+						if(command[i-1] == ',')
+							break;
+						newcom += command[j];
+					}
+				}
+			}
+			//разбиваем строку
+			int countPosition = 0;
+			char stNmame[100]{"\0"};
+			for (int i = countPosition; newcom[i] != ','; i++){ stNmame[i] = newcom[i]; countPosition++;}
+			countPosition+=2;
+			std::string homeNum;
+			for (int i = countPosition; newcom[i] != ','; i++){ homeNum += newcom[i]; countPosition++;}
+			countPosition+=2;
+			std::string workNum;
+			for (int i = countPosition; newcom[i] != ','; i++){ workNum += newcom[i]; countPosition++;}
+			countPosition+=2;
+			std::string otherInfo;
+			for (int i = countPosition; i < newcom.length(); i++){ otherInfo += newcom[i]; countPosition++;}
+			createAbonent(stNmame, homeNum, workNum, otherInfo);
+		}
+		inFile.close();
+	}
 }
 

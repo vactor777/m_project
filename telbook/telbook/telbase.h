@@ -43,7 +43,6 @@ public:
 	int getCount() { return countObj; }
 	void writeToFile();
 	void readToFile();
-	//void readToFile();
 };
 
 #endif

@@ -56,12 +56,12 @@ void Comand::startProgram() {
 		break;
 		case write:
 		{
-			writeToFile(objProgram, command);
+			writeToFile(objProgram);
 		}
 		break;
 		case read:
 		{
-			std::cout << "under development\n";
+			readTofille(objProgram);
 		}
 		break;
 		case unknown:
@@ -207,7 +207,8 @@ void Comand::deletedAbonent(Telbase& obj, const std::string& command)
 	delete[] tmp;
 }
 
-void Comand::writeToFile(Telbase& obj, const std::string& command) { obj.writeToFile(); }
+void Comand::writeToFile(Telbase& obj) { obj.writeToFile(); }
+void Comand::readTofille(Telbase& obj) { obj.readToFile(); }
 
 int Comand::findKey(const std::string& command, const std::string& key) const
 {
