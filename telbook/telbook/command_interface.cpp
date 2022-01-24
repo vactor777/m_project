@@ -7,9 +7,19 @@ void Comand::startProgram() {
 		std::cout << "enter command: ";
 		std::string command;
 		getline(std::cin, command);
+		//убираем пробелы в конце если есть
 		if (command[command.length() - 1] == ' ')
 			for (int i = command.length() - 1; command[i] == ' '; i--)
 				command = command.substr(0, command.size() - 1);
+		//проверка на лишние пробелы
+		std::string tempString;
+		for (int i = 0; i < command.length(); i++){
+			if (command [i] == ' ' && command[i+1] == ' ')
+				continue;
+			tempString += command[i];	
+		}
+		command = tempString;
+		
 		Com chek;
 		chek = findCommand(command);
 		switch (chek)
@@ -101,7 +111,6 @@ void Comand::createAbonCommand(Telbase& obj, const std::string& command)
 		int pos1 = findKey(command, keys[1]);
 		int pos2 = findKey(command, keys[2]);
 		int pos3 = findKey(command, keys[3]);
-		std::cout << "pos1 " << pos1 << ", pos2 " << pos2 << ", pos3" << pos3 << "\n";
 		bool zap = false;
 		if((pos3 != -1) && (pos3 < pos1 || pos3 < pos2) ){ zap = true;}
 		if((pos2 != -1) && pos2 < pos1){ zap = true; }
@@ -126,7 +135,7 @@ void Comand::createAbonCommand(Telbase& obj, const std::string& command)
 			if (positionKey_n != -1) { countKeys++; }
 		}
 	}
-	std::cout << "keys = " << countKeys << std::endl;
+	
 	if (countKeys){
 		bool chekH, chekW, chekO;
 		chekH = chekW = chekO = true;
@@ -176,7 +185,6 @@ void Comand::createAbonCommand(Telbase& obj, const std::string& command)
 					ptrAbon->setInfo(Arg);
 					countKeys--;
 					chekO = false;
-					std::cout << "enter hereOOO\n";
 				}
 			}
 			break;
