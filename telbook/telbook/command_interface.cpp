@@ -7,6 +7,7 @@ void Comand::startProgram() {
 		std::cout << "enter command: ";
 		std::string command;
 		getline(std::cin, command);
+		//проверка строки на корректность пробелов
 		//убираем пробелы в конце если есть
 		if (command[command.length() - 1] == ' ')
 			for (int i = command.length() - 1; command[i] == ' '; i--)
@@ -76,6 +77,7 @@ void Comand::startProgram() {
 
 void Comand::helpCommand(const std::string& command)
 {
+	//справка о командах
 	std::cout << "Help about comand\n";
 	std::cout << "Keys [-n] [-n] record without []";
 	std::cout << "command --help (help about program)\n";
@@ -109,6 +111,7 @@ void Comand::createAbonCommand(Telbase& obj, const std::string& command)
 	
 	if (countKeysTmp){
 	//проверка на приритет ключей
+	//что бы нельзя было вводить ключи как попало
 		int pos1 = findKey(command, keys[1]);
 		int pos2 = findKey(command, keys[2]);
 		int pos3 = findKey(command, keys[3]);
@@ -270,6 +273,7 @@ std::string Comand::findName(const std::string& command, int startpos) const
 }
 
 Com Comand::findCommand(const std::string& com) {
+	//функция по поиску команды 
 	Com tmp = unknown;
 	std::string tmpStr = "";
 	int counSpace = 0;
@@ -335,7 +339,7 @@ void Comand::changeAbonent(Telbase& obj, const std::string& command) {
 		case other_:
 			ptr->setInfo(newNameTmp);
 			break;
-		}
+		}	
 	}
 	delete[] newNameTmpChar;
 	delete[] tmp;
@@ -350,4 +354,3 @@ void Comand::showAbonent(Telbase& obj, const std::string& command)
 	delete[] tmp;
 }
 
-//void readTofille(){}

@@ -43,6 +43,7 @@ void Abonent::setInfo(const std::string otherInfo){otherInfo_ = otherInfo;}
 
 void Abonent::to_string() const
 {
+	//для вывода в консоль через cout	
 	std::cout << "Name: " << name_;
 	std::cout << ", Home Telephone: " << telHome_;
 	std::cout << ", Work Telephone: " << telWork_;
@@ -52,7 +53,8 @@ void Abonent::to_string() const
 
 std::string Abonent::to_string(int anyKeys) const 
 {
-    std::string st = name_;
+    //возвращает строку с информацией об абоненте
+	std::string st = name_;
 	return "Name: " + st + ", Home telephone: " + telHome_
 	+ ", Work Telephone: " + telWork_ + ", Other Info: " + otherInfo_;// +"\n";
 }
@@ -62,8 +64,10 @@ std::string Abonent::to_string(int anyKeys) const
 Telbase::Telbase(){	ptrAbonent = nullptr; ptrStartAbonent = nullptr; countObj = 0;}
 Telbase::~Telbase(){}
 void Telbase::createAbonent(const char* name, std::string telHome, std::string telWork, std::string otherInfo){
+		
 	Abonent* abonent = new Abonent(name, telHome, telWork, otherInfo);
 	if (countObj) {
+		//устанавливаем текущему абоненту указатель на новый созданный абонент
 		ptrAbonent->setPtrNextObj(abonent);
 		ptrAbonent = abonent;
 	}
@@ -97,10 +101,11 @@ void Telbase::changeOtherInfo(const char* name, const std::string otherInfo){
 
 Abonent* Telbase::findAbonent(const char* name) const
 {
+	//ишем абонента по имени и возвращаем указазатель найденого абонента
 	Abonent* ptrTmp = ptrStartAbonent;
 	bool count = true;
 	for (int i = 0; i < countObj; i++) {
-		char* strTmp = ptrTmp->getName();
+		const char* strTmp = ptrTmp->getName();
 		if (strcmp(name, strTmp) == 0)
 			return ptrTmp;
 		Abonent* ptrTmp2 = ptrTmp;
@@ -114,6 +119,7 @@ Abonent* Telbase::findAbonent(const char* name) const
 
 void Telbase::deleteAbonent(const char* name)
 {
+	//удаляем абоненты по имени, код нужно пересмотреть и по возможности сократить
 	Abonent* ptrTmp = ptrStartAbonent;
 	Abonent* ptrOld = ptrStartAbonent;
 	for (int i = 0; i < countObj; i++) {
@@ -150,6 +156,9 @@ void Telbase::deleteAbonent(const char* name)
 
 void Telbase::getAbonent()
 {
+	//функция показать всех абонентов 
+	//использует to_string который выводит через cout
+	//нужно переделать чтобы использовал to_string() который возвращает строку
 	if (countObj == 1)
 		ptrStartAbonent->to_string();
 	else {
@@ -221,6 +230,7 @@ void Telbase::readToFile(){
 			countPosition+=2;
 			std::string otherInfo;
 			for (int i = countPosition; i < newcom.length(); i++){ otherInfo += newcom[i]; countPosition++;}
+			//создаем абонента на информации полученной из файла
 			createAbonent(stNmame, homeNum, workNum, otherInfo);
 		}
 		inFile.close();
